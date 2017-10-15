@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var htmlmin = require('gulp-htmlmin');
 var uglify = require('gulp-uglify');
+var concat = require('gulp-concat');
 
 // run gulp sass
 gulp.task('sass', function(){
@@ -21,5 +22,12 @@ gulp.task('htmlmin', function() {
 gulp.task('uglify', function (cb) {
     return gulp.src('dev/js/*.js')
         .pipe(uglify())
+        .pipe(gulp.dest('public/js'));
+});
+
+// run gulp concat
+gulp.task('concat', function() {
+    return gulp.src('dev/js/*.js')
+        .pipe(concat({ path: 'combined.js', stat: { mode: 0666 }}))
         .pipe(gulp.dest('public/js'));
 });
