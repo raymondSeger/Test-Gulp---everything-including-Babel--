@@ -4,6 +4,7 @@ var htmlmin = require('gulp-htmlmin');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
+var imagemin = require('gulp-imagemin');
 
 // run gulp sass
 gulp.task('sass', function(){
@@ -33,4 +34,11 @@ gulp.task('concatWithSourcemap', function() {
         .pipe(sourcemaps.init())
         .pipe(sourcemaps.write('/.'))
         .pipe(gulp.dest('public/js'));
+});
+
+// run gulp imagemin
+gulp.task('imagemin', function() {
+    gulp.src('dev/images/*')
+        .pipe(imagemin({'verbose': true}))
+        .pipe(gulp.dest('public/images'))
 });
