@@ -5,11 +5,22 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var imagemin = require('gulp-imagemin');
+var cleanCSS = require('gulp-clean-css');
 
 // run gulp sass
 gulp.task('sass', function(){
     return gulp.src('dev/sass/*.scss')
         .pipe(sass()) // Using gulp-sass
+        .pipe(gulp.dest('public/css'))
+});
+
+// run gulp sassWithCleanCSS
+gulp.task('sassWithCleanCSSAndSourceMaps', function(){
+    return gulp.src('dev/sass/*.scss')
+        .pipe(sass()) // Using gulp-sass
+        .pipe(cleanCSS({compatibility: 'ie8'}))
+        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.write('/.'))
         .pipe(gulp.dest('public/css'))
 });
 
