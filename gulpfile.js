@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var htmlmin = require('gulp-htmlmin');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
+var sourcemaps = require('gulp-sourcemaps');
 
 // run gulp sass
 gulp.task('sass', function(){
@@ -26,8 +27,10 @@ gulp.task('uglify', function (cb) {
 });
 
 // run gulp concat
-gulp.task('concat', function() {
+gulp.task('concatWithSourcemap', function() {
     return gulp.src('dev/js/*.js')
         .pipe(concat({ path: 'combined.js', stat: { mode: 0666 }}))
+        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.write('/.'))
         .pipe(gulp.dest('public/js'));
 });
