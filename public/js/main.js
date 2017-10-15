@@ -1,0 +1,1 @@
+var name="raymond",name2=name+" seger";
