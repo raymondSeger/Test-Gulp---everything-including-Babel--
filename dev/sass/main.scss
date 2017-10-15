@@ -28,3 +28,7 @@ nav {
 }
 
 .box { @include border-radius(10px); }
+
+a {
+  display: flex
+}

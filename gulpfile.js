@@ -6,6 +6,8 @@ var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var imagemin = require('gulp-imagemin');
 var cleanCSS = require('gulp-clean-css');
+var postcss      = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
 
 // run gulp sass
 gulp.task('sass', function(){
@@ -21,6 +23,16 @@ gulp.task('sassWithCleanCSSAndSourceMaps', function(){
         .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(sourcemaps.init())
         .pipe(sourcemaps.write('/.'))
+        .pipe(gulp.dest('public/css'))
+});
+
+// run gulp autoprefixer
+gulp.task('sassThenautoprefixer', function () {
+    return gulp.src('dev/sass/*.scss')
+        .pipe(sass()) // Using gulp-sass
+        .pipe(sourcemaps.init())
+        .pipe(postcss([ autoprefixer() ]))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('public/css'))
 });
 
